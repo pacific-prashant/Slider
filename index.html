@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Carousel</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: grid;
+            align-items: center;
+        }
+
+        section {
+            width: 100%;
+            height: auto;
+            overflow-x: hidden;
+        }
+
+        #carousel {
+            width: 7500px;
+            height: 500px;
+            display: flex;
+        }
+
+        .container {
+            width: 500px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+
+        .container:nth-child(odd) {
+            background-color: blueviolet;
+        }
+
+        .container div {
+            width: 300px;
+            height: 200px;
+            background-color: white;
+            border-radius: 22px;
+        }
+
+        .container .active1 {
+            width: 400px;
+            height: 300px;
+        }
+
+        .container .active {
+            width: 300px;
+            height: 200px;
+            animation: 0.7s size ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes size {
+            0% {
+                width: 300px;
+                height: 200px;
+            }
+
+            90% {
+                width: 420px;
+                height: 330px;
+            }
+
+            100% {
+                width: 400px;
+                height: 300px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+    <section id="carousel">
+        <div class="container">
+            <div id="div1"></div>
+        </div>
+        <div class="container">
+            <div id="div2" class="active1"></div>
+        </div>
+        <div class="container">
+            <div id="div3"></div>
+        </div>
+        <div class="container">
+            <div id="div4"></div>
+        </div>
+        <div class="container">
+            <div id="div5"></div>
+        </div>
+        
+    </section>
+    </section>
+
+    <script>
+        i = 3;
+        j = 2;
+        function size() {
+            document.getElementById("div" + 2).classList.remove("active1");
+            document.getElementById("div" + j).classList.remove("active");
+            document.getElementById("div" + i).classList.add("active");
+            i++; j++;
+        }
+
+        k = -500;
+        function rotate(){
+            document.getElementById("carousel").style.transition = "transform 0.5s linear";
+            document.getElementById("carousel").style.transform = "translateX("+k+"px)";
+            if (j == 5) {
+                k = +500;
+                j = 1;
+                i = 2;
+            }
+            k-=500;
+        }
+
+        setTimeout(function call() {
+            setInterval(size, 2000);
+            setInterval(rotate, 2000);
+        }, 2000)
+
+    </script>
+</body>
+</html>
